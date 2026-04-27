@@ -510,6 +510,53 @@ body {
     font-size: 0.85rem;
 }
 
+/* Testimonios Vacios */
+.testimonios-vacio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    margin: 40px 0;
+}
+
+.testimonios-placeholder {
+    text-align: center;
+    padding: 50px;
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--color-primary-light);
+    max-width: 600px;
+    width: 100%;
+}
+
+.testimonios-placeholder i {
+    font-size: 4rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.testimonios-placeholder h3 {
+    font-family: var(--font-heading);
+    color: var(--color-text-dark);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.testimonios-placeholder p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.testimonios-nota {
+    color: var(--color-primary-dark);
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
 /* Booking Section */
 .reservas {
     padding: 100px 0;
