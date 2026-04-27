@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Hair Studio - Tu belleza, nuestra pasión</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-cut"></i>
+                <span>Glow Hair Studio</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <a href="#reservas" class="btn-reservar">Reservar Turno</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Tu belleza, nuestra pasión</h1>
+            <p>Transformamos tu cabello con los mejores tratamientos y estilos. Descubrí el poder de un buen corte.</p>
+            <div class="hero-buttons">
+                <a href="#reservas" class="btn-primary">Reservá tu turno</a>
+                <a href="#servicios" class="btn-secondary">Ver servicios</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-img-placeholder">
+                <i class="fas fa-sparkles"></i>
+                <p>Imagen de salón</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Ofrecemos una amplia gama de servicios para el cuidado y belleza de tu cabello</p>
+            
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Cortes de Cabello</h3>
+                    <p>Cortes personalizados para hombres, mujeres y niños. Estilos modernos y clásicos adaptados a tu rostro.</p>
+                    <span class="precio">Desde $8.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Coloración y Mechas</h3>
+                    <p>Tintes, mechas tradicionales, balayage, ombré y técnicas de coloración de última tendencia.</p>
+                    <span class="precio">Desde $25.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Hidratación Capilar</h3>
+                    <p>Tratamientos intensivos para recuperar la hidratación y suavidad de tu cabello dañado.</p>
+                    <span class="precio">Desde $12.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Nutrición Profunda</h3>
+                    <p>Tratamientos con nutrientes esenciales para fortalecer y revitalizar tu cabello desde la raíz.</p>
+                    <span class="precio">Desde $15.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Restauración Capilar</h3>
+                    <p>Reparación profunda para cabellos severamente dañados por procesos químicos o térmicos.</p>
+                    <span class="precio">Desde $18.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Botox Capilar</h3>
+                    <p>Tratamiento de reconstrucción que elimina el frizz y deja el cabello increíblemente suave y brillante.</p>
+                    <span class="precio">Desde $22.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <h3>Lifting Capilar</h3>
+                    <p>Tratamiento que aporta volumen y cuerpo al cabello fino o sin vida, desde la primera aplicación.</p>
+                    <span class="precio">Desde $20.000</span>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-air-freshener"></i>
+                    </div>
+                    <h3>Peinados y Estilizado</h3>
+                    <p>Peinados para ocasiones especiales, eventos o simplemente para sentirte renovada.</p>
+                    <span class="precio">Desde $10.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="galeria">
+        <div class="container">
+            <h2 class="section-title">Nuestros Trabajos</h2>
+            <p class="section-subtitle">Mirá algunos de los resultados que logramos con nuestros clientes</p>
+            
+            <div class="galeria-grid">
+                <div class="galeria-item">
+                    <div class="galeria-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>Corte moderno</span>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>Coloración</span>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>Balayage</span>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>Tratamiento</span>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>Peinado elegante</span>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <div class="galeria-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>Transformación</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="galeria-nota">
+                <p><i class="fas fa-info-circle"></i> <strong>Nota:</strong> Para agregar tus propias fotos, simplemente reemplazá los cuadros grises con imágenes reales de tu trabajo. Podés usar servicios gratuitos como <a href="https://unsplash.com" target="_blank">Unsplash</a> o subir tus propias fotos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="testimonios">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-subtitle">Testimonios de quienes ya confiaron en nosotros</p>
+            
+            <div class="testimonios-grid">
+                <div class="testimonio-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"El mejor lugar para cuidar mi cabello. El botox capilar cambió completamente la textura de mi pelo. ¡Totalmente recomendado!"</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <span>Cliente desde 2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Increíble atención y profesionalismo. Me hicieron un balayage espectacular que recibo cumplidos todos los días."</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Lucía Martínez</h4>
+                            <span>Cliente desde 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Llevo a mi hijo desde pequeño y siempre salimos contentos. Buenos precios y excelente trato."</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Rodríguez</h4>
+                            <span>Cliente desde 2022</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="reservas" class="reservas">
+        <div class="container">
+            <h2 class="section-title">Reservá tu Turno</h2>
+            <p class="section-subtitle">Completá el formulario y te contactaremos para confirmar tu cita</p>
+            
+            <div class="reservas-container">
+                <form class="reservas-form" id="form-reserva">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" required placeholder="Tu teléfono">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Tu email (opcional)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="servicio">Servicio *</label>
+                            <select id="servicio" name="servicio" required>
+                                <option value="">Seleccioná un servicio</option>
+                                <option value="corte">Corte de cabello</option>
+                                <option value="coloracion">Coloración / Mechas</option>
+                                <option value="hidratacion">Hidratación</option>
+                                <option value="nutricion">Nutrición</option>
+                                <option value="restauracion">Restauración</option>
+                                <option value="botox">Botox Capilar</option>
+                                <option value="lifting">Lifting Capilar</option>
+                                <option value="peinado">Peinado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha preferida *</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="horario">Horario preferido *</label>
+                        <select id="horario" name="horario" required>
+                            <option value="">Seleccioná un horario</option>
+                            <option value="09:00">09:00 hs</option>
+                            <option value="10:00">10:00 hs</option>
+                            <option value="11:00">11:00 hs</option>
+                            <option value="12:00">12:00 hs</option>
+                            <option value="14:00">14:00 hs</option>
+                            <option value="15:00">15:00 hs</option>
+                            <option value="16:00">16:00 hs</option>
+                            <option value="17:00">17:00 hs</option>
+                            <option value="18:00">18:00 hs</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notas">Notas adicionales</label>
+                        <textarea id="notas" name="notas" rows="3" placeholder="¿Algo que debamos saber? (alergias, preferencias, etc.)"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-calendar-check"></i>
+                        Solicitar turno
+                    </button>
+                </form>
+                
+                <div class="reservas-info">
+                    <h3>Información importante</h3>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> <strong>Horarios:</strong> Lunes a Sábado de 9:00 a 19:00</li>
+                        <li><i class="fas fa-phone"></i> <strong>Teléfono:</strong> [Tu teléfono]</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> [Tu dirección]</li>
+                        <li><i class="fas fa-exclamation-circle"></i> <strong>Política de cancelación:</strong> Por favor, avisá con al menos 24hs de anticipación si necesitás cancelar.</li>
+                    </ul>
+                    
+                    <div class="whatsapp-reserva">
+                        <p>O reservá directamente por WhatsApp:</p>
+                        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Quiero%20reservar%20un%20turno" class="btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            Reservar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">Blog & Consejos</h2>
+            <p class="section-subtitle">Tips y recomendaciones para el cuidado de tu cabello</p>
+            
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Cuidado Capilar</span>
+                        <h3>5 tips para mantener tu coloración por más tiempo</h3>
+                        <p>Descubrí cómo prolongar la vida de tu tinte y mantener el color vibrante entre visitas al salón...</p>
+                        <a href="#" class="blog-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Tratamientos</span>
+                        <h3>Botox Capilar: ¿Qué es y cómo funciona?</h3>
+                        <p>Todo lo que necesitás saber sobre este revolucionario tratamiento de reconstrucción capilar...</p>
+                        <a href="#" class="blog-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Tendencias</span>
+                        <h3>Los cortes de cabello que serán tendencia este año</h3>
+                        <p>Desde el clásico bob hasta cortes desfilados, conocé los estilos que dominarán la temporada...</p>
+                        <a href="#" class="blog-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contacto">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <p class="section-subtitle">Estamos acá para ayudarte. ¡Contactanos!</p>
+            
+            <div class="contacto-grid">
+                <div class="contacto-info">
+                    <div class="contacto-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Dirección</h4>
+                            <p>[Tu dirección completa]</p>
+                            <p>[Ciudad, Provincia]</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contacto-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>[Tu número de teléfono]</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contacto-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>[tuemail@ejemplo.com]</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contacto-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horarios de atención</h4>
+                            <p>Lunes a Sábado: 9:00 - 19:00</p>
+                            <p>Domingo: Cerrado</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contacto-social">
+                        <h4>Seguinos en redes</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contacto-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map"></i>
+                        <p>Mapa de ubicación</p>
+                        <span>Para agregar tu ubicación real, insertá un mapa de Google Maps. Podés generarlo gratis en <a href="https://maps.google.com" target="_blank">Google Maps</a> > Compartir > Insertar mapa.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-cut"></i>
+                        <span>Glow Hair Studio</span>
+                    </div>
+                    <p>Tu belleza, nuestra pasión. Transformamos tu cabello con amor y profesionalismo.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Enlaces rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#galeria">Galería</a></li>
+                        <li><a href="#reservas">Reservas</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#">Cortes</a></li>
+                        <li><a href="#">Coloración</a></li>
+                        <li><a href="#">Tratamientos</a></li>
+                        <li><a href="#">Peinados</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Recibí tips y promociones exclusivas</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Glow Hair Studio. Todos los derechos reservados.</p>
+                <p class="footer-note">Sitio web creado con ❤️ para tu peluquería</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de confirmación -->
+    <div id="modal-confirmacion" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h3>¡Reserva recibida!</h3>
+            <p>Gracias por solicitar tu turno. Te contactaremos pronto para confirmar tu cita.</p>
+            <button class="btn-cerrar-modal">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
