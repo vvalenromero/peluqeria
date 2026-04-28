@@ -290,9 +290,238 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================
 // PRELOADER (opcional)
 // ============================================
+// ============================================
+// FORMULARIO DE TESTIMONIOS
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    initTestimonioForm();
+});
+
+function initTestimonioForm() {
+    const form = document.getElementById('form-testimonio');
+    const textarea = document.getElementById('testimonio-comentario');
+    const charCount = document.getElementById('char-count');
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('testimonio-calificacion');
+    
+    if (!form) return;
+    
+    // Contador de caracteres
+    if (textarea && charCount) {
+        textarea.addEventListener('input', function() {
+            const length = this.value.length;
+            charCount.textContent = length;
+            
+            if (length > 500) {
+                this.value = this.value.substring(0, 500);
+                charCount.textContent = 500;
+                charCount.style.color = '#ff6b6b';
+            } else if (length > 450) {
+                charCount.style.color = '#ffa726';
+            } else {
+                charCount.style.color = '';
+            }
+        });
+    }
+    
+    // Estrellas de calificación
+    if (stars.length && ratingInput) {
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                ratingInput.value = value;
+                
+                // Remover todas las clases active
+                stars.forEach(s => s.classList.remove('active'));
+                
+                // Agregar clase active hasta la estrella seleccionada
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('active');
+                }
+            });
+            
+            star.addEventListener('mouseover', function() {
+                const value = this.getAttribute('data-value');
+                
+                // Remover todas las clases active
+                stars.forEach(s => s.classList.remove('hover'));
+                
+                // Agregar clase hover hasta la estrella seleccionada
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('hover');
+                }
+            });
+        });
+        
+        // Remover hover al salir del contenedor
+        const ratingContainer = document.querySelector('.rating-stars');
+        if (ratingContainer) {
+            ratingContainer.addEventListener('mouseleave', function() {
+                stars.forEach(s => s.classList.remove('hover'));
+            });
+        }
+    }
+    
+    // Envío del formulario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validarTestimonioForm(this)) {
+            const testimonioData = {
+                nombre: this.querySelector('#testimonio-nombre').value,
+                email: this.querySelector('#testimonio-email').value,
+                servicio: this.querySelector('#testimonio-servicio').options[this.querySelector('#testimonio-servicio').selectedIndex].text,
+                calificacion: parseInt(this.querySelector('#testimonio-calificacion').value),
+                comentario: this.querySelector('#testimonio-comentario').value
+            };
+            
+            // Guardar en localStorage (para demostración)
+            guardarTestimonioEnLocal(testimonioData);
+            
+            mostrarConfirmacionTestimonio();
+            this.reset();
+            
+            // Resetear estrellas
+            if (stars.length) {
+                stars.forEach(s => s.classList.remove('active'));
+            }
+            if (ratingInput) {
+                ratingInput.value = '';
+            }
+            
+            // Resetear contador
+            if (charCount) {
+                charCount.textContent = '0';
+                charCount.style.color = '';
+            }
+        }
+    });
+}
+
+function validarTestimonioForm(form) {
+    let esValido = true;
+    const camposRequeridos = form.querySelectorAll('[required]');
+    
+    camposRequeridos.forEach(campo => {
+        if (!campo.value.trim()) {
+            esValido = false;
+            campo.style.borderColor = '#ff6b6b';
+            
+            setTimeout(() => {
+                campo.style.borderColor = '';
+            }, 3000);
+        }
+    });
+    
+    // Validar calificación
+    const calificacion = form.querySelector('#testimonio-calificacion');
+    if (calificacion && !calificacion.value) {
+        esValido = false;
+        alert('Por favor, seleccioná una calificación con las estrellas');
+        return false;
+    }
+    
+    // Validar comentario mínimo
+    const comentario = form.querySelector('#testimonio-comentario');
+    if (comentario && comentario.value.trim().length < 10) {
+        esValido = false;
+        alert('Por favor, escribí un comentario más detallado (mínimo 10 caracteres)');
+        comentario.focus();
+        return false;
+    }
+    
+    return esValido;
+}
+
+function mostrarConfirmacionTestimonio() {
+    const modal = document.getElementById('modal-confirmacion');
+    if (modal) {
+        modal.querySelector('h3').textContent = '¡Testimonio enviado!';
+        modal.querySelector('p').textContent = 'Gracias por compartir tu experiencia. Revisaremos tu comentario y lo publicaremos en 24-48 horas.';
+        modal.classList.add('active');
+        
+        setTimeout(() => {
+            modal.classList.remove('active');
+        }, 5000);
+    } else {
+        alert('¡Testimonio enviado! Gracias por compartir tu experiencia.');
+    }
+}
+
+// Cargar testimonios guardados en localStorage
+function cargarTestimoniosGuardados() {
+    const testimoniosGuardados = localStorage.getItem('testimonios_glow_hair');
+    const contenedor = document.getElementById('testimonios-lista');
+    
+    if (!testimoniosGuardados || !contenedor) return;
+    
+    const testimonios = JSON.parse(testimoniosGuardados);
+    
+    if (testimonios.length > 0) {
+        contenedor.innerHTML = '';
+        
+        testimonios.forEach(testimonio => {
+            const testimonioHTML = crearTestimonioHTML(testimonio);
+            contenedor.appendChild(testimonioHTML);
+        });
+    }
+}
+
+function crearTestimonioHTML(testimonio) {
+    const div = document.createElement('div');
+    div.className = 'testimonio-real';
+    
+    // Crear estrellas
+    let estrellasHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= testimonio.calificacion) {
+            estrellasHTML += '★';
+        } else {
+            estrellasHTML += '☆';
+        }
+    }
+    
+    const fecha = new Date(testimonio.fecha).toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+    
+    div.innerHTML = `
+        <div class="stars">${estrellasHTML}</div>
+        <div class="testimonio-content">"${testimonio.comentario}"</div>
+        <div class="testimonio-footer">
+            <div class="author">${testimonio.nombre}</div>
+            <div class="service">${testimonio.servicio}</div>
+            <div class="date">${fecha}</div>
+        </div>
+    `;
+    
+    return div;
+}
+
+// Guardar testimonio en localStorage (para demostración)
+function guardarTestimonioEnLocal(testimonio) {
+    const testimoniosGuardados = localStorage.getItem('testimonios_glow_hair');
+    let testimonios = [];
+    
+    if (testimoniosGuardados) {
+        testimonios = JSON.parse(testimoniosGuardados);
+    }
+    
+    testimonio.fecha = new Date().toISOString();
+    testimonios.push(testimonio);
+    
+    localStorage.setItem('testimonios_glow_hair', JSON.stringify(testimonios));
+    cargarTestimoniosGuardados();
+}
+
 window.addEventListener('load', function() {
     // Agregar clase loaded al body para animaciones de entrada
     document.body.classList.add('loaded');
+    
+    // Cargar testimonios guardados
+    cargarTestimoniosGuardados();
 });
 / /  
  V e r s i o n :  

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glow Hair Studio | Tu peluquería de confianza</title>
-    <link rel="stylesheet" href="styles-v2.css">
+    <link rel="stylesheet" href="styles-v2.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -190,14 +190,88 @@
     <section id="testimonios" class="testimonios">
         <div class="container">
             <h2 class="section-title">Opiniones de nuestros clientes</h2>
-            <p class="section-subtitle">Valoramos la honestidad por encima de todo</p>
+            <p class="section-subtitle">Tu experiencia es lo más importante para nosotros</p>
             
-            <div class="testimonios-vacio">
-                <div class="testimonios-placeholder">
-                    <i class="fas fa-comment-alt"></i>
-                    <h3>Tus testimonios aparecerán aquí</h3>
-                    <p>Conforme recibas comentarios de clientes satisfechos, podrás agregarlos en esta sección.</p>
-                    <p class="testimonios-nota">La transparencia es nuestra prioridad: solo mostrar comentarios reales y verificados.</p>
+            <div class="testimonios-container">
+                <!-- Lugar para testimonios futuros -->
+                <div class="testimonios-vacio" id="testimonios-lista">
+                    <div class="testimonios-placeholder">
+                        <i class="fas fa-comment-alt"></i>
+                        <h3>¡Sé el primero en dejar tu opinión!</h3>
+                        <p>Tu testimonio ayudará a otras personas a conocernos mejor.</p>
+                        <p class="testimonios-nota">Todos los comentarios son verificados para mantener la transparencia.</p>
+                    </div>
+                </div>
+                
+                <!-- Formulario para dejar testimonio -->
+                <div class="testimonio-form-container">
+                    <h3 class="form-title">Dejá tu testimonio</h3>
+                    <p class="form-subtitle">Compartí tu experiencia con nuestro servicio</p>
+                    
+                    <form class="testimonio-form" id="form-testimonio">
+                        <div class="form-group">
+                            <label for="testimonio-nombre">Tu nombre *</label>
+                            <input type="text" id="testimonio-nombre" name="nombre" required placeholder="Cómo te gustaría aparecer">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonio-email">Tu email (opcional)</label>
+                            <input type="email" id="testimonio-email" name="email" placeholder="Solo para verificarnos contigo">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonio-servicio">¿Qué servicio recibiste? *</label>
+                            <select id="testimonio-servicio" name="servicio" required>
+                                <option value="">Seleccioná el servicio</option>
+                                <option value="corte">Corte de cabello</option>
+                                <option value="coloracion">Coloración / Mechas</option>
+                                <option value="hidratacion">Hidratación</option>
+                                <option value="nutricion">Nutrición</option>
+                                <option value="restauracion">Restauración</option>
+                                <option value="botox">Botox Capilar</option>
+                                <option value="lifting">Lifting Capilar</option>
+                                <option value="peinado">Peinado</option>
+                                <option value="varios">Varios servicios</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonio-calificacion">Calificación *</label>
+                            <div class="rating-stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                                <span class="rating-text">Seleccioná de 1 a 5 estrellas</span>
+                            </div>
+                            <input type="hidden" id="testimonio-calificacion" name="calificacion" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimonio-comentario">Tu testimonio *</label>
+                            <textarea id="testimonio-comentario" name="comentario" rows="4" required placeholder="Contános tu experiencia, qué te gustó, cómo fue la atención..."></textarea>
+                            <small class="char-count"><span id="char-count">0</span>/500 caracteres</small>
+                        </div>
+                        
+                        <div class="form-consent">
+                            <input type="checkbox" id="testimonio-consentimiento" name="consentimiento" required>
+                            <label for="testimonio-consentimiento">
+                                Acepto que mi testimonio sea publicado en esta página (podemos usar solo tu nombre o iniciales si preferís)
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-testimonio">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar testimonio
+                        </button>
+                    </form>
+                    
+                    <div class="testimonio-info">
+                        <p><i class="fas fa-info-circle"></i> <strong>Importante:</strong> Todos los testimonios son revisados antes de publicarse para asegurar autenticidad.</p>
+                        <p><i class="fas fa-clock"></i> <strong>Tiempo de publicación:</strong> 24-48 horas después de enviado.</p>
+                        <p><i class="fas fa-shield-alt"></i> <strong>Privacidad:</strong> Solo publicaremos tu nombre (o iniciales) y comentario.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -471,6 +545,6 @@
         </div>
     </div>
 
-    <script src="script-v2.js"></script>
+    <script src="script-v2.js?v=3"></script>
 </body>
 </html>
