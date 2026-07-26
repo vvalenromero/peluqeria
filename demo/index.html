@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Navaja — Barbería</title>
+<style>
+  :root {
+    --negro: #0e0d0b;
+    --carbon: #171511;
+    --gris: #23201a;
+    --dorado: #c9a227;
+    --dorado-claro: #e8c85a;
+    --crema: #f2ead8;
+    --gris-texto: #9a917e;
+    --verde: #4a7c59;
+    --rojo: #a33b2e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--negro);
+    color: var(--crema);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(14,13,11,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,162,39,.25);
+  }
+  .logo { font-size: 1.4rem; letter-spacing: .15em; color: var(--dorado); text-transform: uppercase; }
+  .logo span { color: var(--crema); }
+  nav ul { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+  nav a { color: var(--gris-texto); text-decoration: none; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
+  nav a:hover { color: var(--dorado-claro); }
+  .btn-nav {
+    background: var(--dorado); color: var(--negro) !important;
+    padding: .5rem 1.2rem; border-radius: 2px; font-weight: bold;
+  }
+  .btn-nav:hover { background: var(--dorado-claro); }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 2rem;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,162,39,.12), transparent 60%),
+      linear-gradient(180deg, var(--carbon), var(--negro));
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: "✂";
+    position: absolute; font-size: 40rem; opacity: .03;
+    top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg);
+    pointer-events: none;
+  }
+  .hero .subtitulo { color: var(--dorado); letter-spacing: .4em; text-transform: uppercase; font-size: .85rem; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); letter-spacing: .08em; text-transform: uppercase; line-height: 1.1; }
+  .hero h1 em { color: var(--dorado); font-style: normal; }
+  .hero p { color: var(--gris-texto); max-width: 520px; margin: 1.5rem 0 2.5rem; font-size: 1.1rem; }
+  .btn {
+    display: inline-block; padding: 1rem 2.5rem;
+    background: var(--dorado); color: var(--negro);
+    text-decoration: none; font-weight: bold; letter-spacing: .15em;
+    text-transform: uppercase; font-size: .9rem; border-radius: 2px;
+    border: none; cursor: pointer; font-family: inherit;
+    transition: transform .2s, background .2s;
+  }
+  .btn:hover { background: var(--dorado-claro); transform: translateY(-2px); }
+  .btn.secundario { background: transparent; color: var(--crema); border: 1px solid var(--gris); margin-left: 1rem; }
+  .btn.secundario:hover { border-color: var(--dorado); color: var(--dorado-claro); }
+  .bigote { width: 120px; margin-bottom: 1.5rem; opacity: .9; }
+
+  /* ============ SECCIONES ============ */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .seccion-titulo { text-align: center; margin-bottom: 3.5rem; }
+  .seccion-titulo .etiqueta { color: var(--dorado); letter-spacing: .35em; text-transform: uppercase; font-size: .8rem; }
+  .seccion-titulo h2 { font-size: 2.4rem; text-transform: uppercase; letter-spacing: .06em; margin-top: .5rem; }
+  .seccion-titulo .linea { width: 60px; height: 2px; background: var(--dorado); margin: 1.2rem auto 0; }
+
+  /* ============ SERVICIOS ============ */
+  .servicios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .servicio {
+    background: var(--carbon); border: 1px solid var(--gris);
+    padding: 2rem; border-radius: 4px; text-align: center;
+    transition: border-color .3s, transform .3s;
+  }
+  .servicio:hover { border-color: var(--dorado); transform: translateY(-4px); }
+  .servicio .icono { font-size: 2.5rem; margin-bottom: 1rem; }
+  .servicio h3 { text-transform: uppercase; letter-spacing: .1em; font-size: 1.05rem; margin-bottom: .5rem; }
+  .servicio p { color: var(--gris-texto); font-size: .9rem; margin-bottom: 1rem; }
+  .servicio .precio { color: var(--dorado-claro); font-size: 1.5rem; }
+  .servicio .duracion { color: var(--gris-texto); font-size: .8rem; letter-spacing: .1em; }
+
+  /* ============ INFO LOCAL ============ */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .info-card {
+    background: var(--carbon); border: 1px solid var(--gris); border-radius: 4px;
+    padding: 2rem; text-align: center;
+  }
+  .info-card h3 { color: var(--dorado); text-transform: uppercase; letter-spacing: .15em; font-size: .9rem; margin-bottom: 1rem; }
+  .info-card p { color: var(--crema); font-size: 1.05rem; }
+  .info-card small { color: var(--gris-texto); }
+  .horarios-tabla { width: 100%; border-collapse: collapse; }
+  .horarios-tabla td { padding: .35rem 0; border-bottom: 1px solid var(--gris); }
+  .horarios-tabla td:first-child { color: var(--gris-texto); }
+  .horarios-tabla td:last-child { text-align: right; }
+  .link-mapa { color: var(--dorado-claro); text-decoration: none; border-bottom: 1px dotted var(--dorado); }
+
+  /* ============ REGISTRADORA (DUEÑO) ============ */
+  .caja-wrap { max-width: 760px; margin: 0 auto; }
+  .aviso-dueno {
+    text-align: center; color: var(--gris-texto); font-size: .85rem;
+    margin: -2rem 0 2rem; letter-spacing: .05em;
+  }
+  .registradora {
+    background: var(--carbon); border: 1px solid var(--gris);
+    border-radius: 6px; padding: 2rem;
+  }
+  .registradora h3 { color: var(--dorado); letter-spacing: .15em; text-transform: uppercase; font-size: .85rem; margin-bottom: .8rem; }
+  .botones-reg { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .6rem; margin-bottom: 1.4rem; }
+  .btn-reg {
+    background: var(--gris); border: 1px solid transparent; border-radius: 4px;
+    padding: .8rem .6rem; cursor: pointer; color: var(--crema); font-family: inherit;
+    font-size: .95rem; transition: all .2s; text-align: center;
+  }
+  .btn-reg small { display: block; color: var(--gris-texto); font-size: .75rem; }
+  .btn-reg:hover { border-color: rgba(201,162,39,.5); }
+  .btn-reg.seleccionada { border-color: var(--dorado); background: rgba(201,162,39,.12); }
+  .btn-reg.seleccionada small { color: var(--dorado-claro); }
+  .btn-cobrar {
+    width: 100%; padding: 1.1rem; background: var(--verde); color: var(--crema);
+    border: none; border-radius: 4px; font-family: inherit; font-size: 1.05rem;
+    font-weight: bold; letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+    transition: filter .2s; margin-bottom: .5rem;
+  }
+  .btn-cobrar:hover:not(:disabled) { filter: brightness(1.2); }
+  .btn-cobrar:disabled { opacity: .35; cursor: not-allowed; }
+  .aviso-cobrado { text-align: center; color: var(--dorado-claro); min-height: 1.5rem; font-size: .95rem; }
+
+  .paneles { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  .panel { background: var(--carbon); border: 1px solid var(--gris); border-radius: 6px; padding: 1.5rem; }
+  .panel h3 { color: var(--dorado); letter-spacing: .15em; text-transform: uppercase; font-size: .85rem; margin-bottom: 1rem; }
+  .panel .total-grande { font-size: 2.2rem; color: var(--crema); margin-bottom: .2rem; }
+  .panel .sub { color: var(--gris-texto); font-size: .85rem; margin-bottom: 1rem; }
+  .fila-corte {
+    display: flex; justify-content: space-between; padding: .45rem 0;
+    border-bottom: 1px solid var(--gris); font-size: .92rem;
+  }
+  .fila-corte small { color: var(--gris-texto); display: block; }
+  .fila-corte .monto { color: var(--dorado-claro); white-space: nowrap; }
+  .btn-deshacer {
+    background: transparent; border: 1px solid var(--rojo); color: var(--rojo);
+    padding: .4rem .9rem; border-radius: 2px; cursor: pointer; font-size: .75rem;
+    text-transform: uppercase; letter-spacing: .1em; font-family: inherit; margin-top: .8rem;
+  }
+  .btn-deshacer:hover { background: var(--rojo); color: var(--crema); }
+  .fila-barbero { display: flex; justify-content: space-between; padding: .6rem 0; border-bottom: 1px solid var(--gris); }
+  .fila-barbero .comision { text-align: right; }
+  .fila-barbero .comision small { display: block; color: var(--gris-texto); }
+  .vacio { color: var(--gris-texto); text-align: center; padding: 1.2rem 0; font-size: .9rem; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    border-top: 1px solid var(--gris); color: var(--gris-texto); font-size: .85rem;
+  }
+  footer .logo { font-size: 1.1rem; margin-bottom: .5rem; }
+
+  @media (max-width: 640px) {
+    nav ul li:not(:last-child) { display: none; }
+    .btn.secundario { margin-left: 0; margin-top: .8rem; }
+    .paneles { grid-template-columns: 1fr; }
+    .registradora { padding: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">La <span>Navaja</span></div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#visitanos">Visitanos</a></li>
+    <li><a href="#caja">Caja</a></li>
+    <li><a href="https://wa.me/5491100000000" target="_blank" class="btn-nav">WhatsApp</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <svg class="bigote" viewBox="0 0 120 30" fill="none" stroke="#c9a227" stroke-width="2.5" stroke-linecap="round">
+    <path d="M60 15 C50 5, 35 2, 22 8 C10 13, 5 22, 12 25 C18 27, 24 20, 30 16 C40 10, 52 12, 60 15 Z"/>
+    <path d="M60 15 C70 5, 85 2, 98 8 C110 13, 115 22, 108 25 C102 27, 96 20, 90 16 C80 10, 68 12, 60 15 Z"/>
+  </svg>
+  <p class="subtitulo">Est. 2026 — Barbería Clásica</p>
+  <h1>Estilo que se<br><em>hereda</em></h1>
+  <p>Cortes de precisión, afeitado con toalla caliente y la mejor charla del barrio. Sin turnos: venís, esperás lo tuyo y salís hecho un señor.</p>
+  <div>
+    <a href="#servicios" class="btn">Ver servicios</a>
+    <a href="#visitanos" class="btn secundario">Cómo llegar</a>
+  </div>
+</header>
+
+<section id="servicios">
+  <div class="seccion-titulo">
+    <p class="etiqueta">Nuestros servicios</p>
+    <h2>El menú del caballero</h2>
+    <div class="linea"></div>
+  </div>
+  <div class="servicios-grid" id="servicios-grid"></div>
+</section>
+
+<section id="visitanos">
+  <div class="seccion-titulo">
+    <p class="etiqueta">Por orden de llegada</p>
+    <h2>Visitanos</h2>
+    <div class="linea"></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Dirección</h3>
+      <p>Av. Corrientes 1234</p>
+      <small>Buenos Aires — <a class="link-mapa" href="https://maps.google.com/?q=Av.+Corrientes+1234" target="_blank">ver en el mapa</a></small>
+    </div>
+    <div class="info-card">
+      <h3>Horarios</h3>
+      <table class="horarios-tabla">
+        <tr><td>Lunes a Viernes</td><td>9 a 20 hs</td></tr>
+        <tr><td>Sábados</td><td>9 a 18 hs</td></tr>
+        <tr><td>Domingos</td><td>Cerrado</td></tr>
+      </table>
+    </div>
+    <div class="info-card">
+      <h3>Contacto</h3>
+      <p><a class="link-mapa" href="https://wa.me/5491100000000" target="_blank">11 5555 5555</a></p>
+      <small>@lanavaja.barberia en Instagram</small>
+    </div>
+  </div>
+</section>
+
+<section id="caja">
+  <div class="seccion-titulo">
+    <p class="etiqueta">Solo para el dueño</p>
+    <h2>Registradora</h2>
+    <div class="linea"></div>
+  </div>
+  <p class="aviso-dueno">Terminás un corte → tocás servicio, barbero y "cobrar". Dos segundos y queda todo anotado.</p>
+  <div class="caja-wrap">
+
+    <div class="registradora">
+      <h3>Servicio</h3>
+      <div class="botones-reg" id="reg-servicios"></div>
+      <h3>Barbero</h3>
+      <div class="botones-reg" id="reg-barberos"></div>
+      <button class="btn-cobrar" id="btn-cobrar" disabled>Cobrar</button>
+      <div class="aviso-cobrado" id="aviso-cobrado"></div>
+    </div>
+
+    <div class="paneles">
+      <div class="panel">
+        <h3>Caja de hoy</h3>
+        <div class="total-grande" id="hoy-total">$0</div>
+        <div class="sub" id="hoy-cant">0 cortes</div>
+        <div id="hoy-lista"></div>
+        <button class="btn-deshacer" id="btn-deshacer" style="display:none">Deshacer último</button>
+      </div>
+      <div class="panel">
+        <h3>El mes</h3>
+        <div class="total-grande" id="mes-total">$0</div>
+        <div class="sub" id="mes-cant">0 cortes este mes</div>
+        <div id="mes-barberos"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="logo">La <span>Navaja</span></div>
+  <p>Av. Corrientes 1234 — Lun a Sáb, 9 a 20 hs</p>
+  <p style="margin-top:.8rem; opacity:.6">Demo hecha con cariño para un amigo ✂</p>
+</footer>
+
+<script>
+// ==================== DATOS ====================
+const SERVICIOS = [
+  { id: 'corte',   nombre: 'Corte clásico',    desc: 'Tijera y máquina, terminación con navaja', precio: 8000,  duracion: 40, icono: '✂️' },
+  { id: 'barba',   nombre: 'Arreglo de barba', desc: 'Perfilado con navaja y toalla caliente',   precio: 6000,  duracion: 30, icono: '🪒' },
+  { id: 'combo',   nombre: 'Corte + Barba',    desc: 'El combo completo del caballero',          precio: 12000, duracion: 60, icono: '💈' },
+  { id: 'premium', nombre: 'Ritual Premium',   desc: 'Corte, barba, masaje y lavado',            precio: 18000, duracion: 90, icono: '👑' },
+];
+const BARBEROS = [
+  { id: 'marcos', nombre: 'Marcos' },
+  { id: 'dani',   nombre: 'Dani' },
+];
+const COMISION = 0.5; // 50% para el barbero (ejemplo para la demo)
+
+// ==================== ESTADO ====================
+const state = { servicio: null, barbero: null };
+const LS_KEY = 'lanavaja_cortes';
+const getCortes = () => JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+const saveCortes = (c) => localStorage.setItem(LS_KEY, JSON.stringify(c));
+const fmt$ = (n) => '$' + n.toLocaleString('es-AR');
+const hoyKey = () => new Date().toISOString().slice(0, 10);
+const mesKey = () => new Date().toISOString().slice(0, 7);
+
+// ==================== VIDRIERA ====================
+document.getElementById('servicios-grid').innerHTML = SERVICIOS.map(s => `
+  <div class="servicio">
+    <div class="icono">${s.icono}</div>
+    <h3>${s.nombre}</h3>
+    <p>${s.desc}</p>
+    <div class="precio">${fmt$(s.precio)}</div>
+    <div class="duracion">${s.duracion} MIN APROX</div>
+  </div>`).join('');
+
+// ==================== REGISTRADORA ====================
+function renderRegServicios() {
+  document.getElementById('reg-servicios').innerHTML = SERVICIOS.map(s => `
+    <button class="btn-reg ${state.servicio?.id === s.id ? 'seleccionada' : ''}" data-id="${s.id}">
+      ${s.nombre}<small>${fmt$(s.precio)}</small>
+    </button>`).join('');
+  document.querySelectorAll('#reg-servicios .btn-reg').forEach(el =>
+    el.addEventListener('click', () => {
+      state.servicio = SERVICIOS.find(s => s.id === el.dataset.id);
+      renderRegServicios(); validarCobro();
+    }));
+}
+function renderRegBarberos() {
+  document.getElementById('reg-barberos').innerHTML = BARBEROS.map(b => `
+    <button class="btn-reg ${state.barbero?.id === b.id ? 'seleccionada' : ''}" data-id="${b.id}">${b.nombre}</button>
+  `).join('');
+  document.querySelectorAll('#reg-barberos .btn-reg').forEach(el =>
+    el.addEventListener('click', () => {
+      state.barbero = BARBEROS.find(b => b.id === el.dataset.id);
+      renderRegBarberos(); validarCobro();
+    }));
+}
+function validarCobro() {
+  document.getElementById('btn-cobrar').disabled = !(state.servicio && state.barbero);
+}
+
+document.getElementById('btn-cobrar').addEventListener('click', () => {
+  const ahora = new Date();
+  const cortes = getCortes();
+  cortes.push({
+    id: Date.now(),
+    servicioId: state.servicio.id,
+    servicioNombre: state.servicio.nombre,
+    barberoId: state.barbero.id,
+    barberoNombre: state.barbero.nombre,
+    precio: state.servicio.precio,
+    fecha: ahora.toISOString().slice(0, 10),
+    mes: ahora.toISOString().slice(0, 7),
+    hora: ahora.toTimeString().slice(0, 5),
+  });
+  saveCortes(cortes);
+  const aviso = document.getElementById('aviso-cobrado');
+  aviso.textContent = `✓ ${state.servicio.nombre} — ${state.barbero.nombre} — ${fmt$(state.servicio.precio)}`;
+  setTimeout(() => aviso.textContent = '', 3000);
+  renderPaneles();
+});
+
+document.getElementById('btn-deshacer').addEventListener('click', () => {
+  const cortes = getCortes();
+  if (!cortes.length) return;
+  cortes.pop();
+  saveCortes(cortes);
+  renderPaneles();
+});
+
+function renderPaneles() {
+  const cortes = getCortes();
+  const deHoy = cortes.filter(c => c.fecha === hoyKey());
+  const delMes = cortes.filter(c => c.mes === mesKey());
+
+  // Caja de hoy
+  document.getElementById('hoy-total').textContent = fmt$(deHoy.reduce((a, c) => a + c.precio, 0));
+  document.getElementById('hoy-cant').textContent = `${deHoy.length} corte${deHoy.length === 1 ? '' : 's'}`;
+  document.getElementById('hoy-lista').innerHTML = deHoy.length
+    ? deHoy.slice().reverse().map(c => `
+      <div class="fila-corte">
+        <div>${c.servicioNombre}<small>${c.barberoNombre} · ${c.hora} hs</small></div>
+        <div class="monto">${fmt$(c.precio)}</div>
+      </div>`).join('')
+    : '<div class="vacio">Todavía no hay cortes hoy. Registrá el primero arriba.</div>';
+  document.getElementById('btn-deshacer').style.display = deHoy.length ? 'inline-block' : 'none';
+
+  // El mes
+  document.getElementById('mes-total').textContent = fmt$(delMes.reduce((a, c) => a + c.precio, 0));
+  document.getElementById('mes-cant').textContent = `${delMes.length} cortes este mes`;
+  document.getElementById('mes-barberos').innerHTML = delMes.length
+    ? BARBEROS.map(b => {
+        const suyos = delMes.filter(c => c.barberoId === b.id);
+        const bruto = suyos.reduce((a, c) => a + c.precio, 0);
+        return `
+        <div class="fila-barbero">
+          <div>${b.nombre}<small style="color:var(--gris-texto)">${suyos.length} cortes · bruto ${fmt$(bruto)}</small></div>
+          <div class="comision">${fmt$(Math.round(bruto * COMISION))}<small>su comisión (50%)</small></div>
+        </div>`;
+      }).join('')
+    : '<div class="vacio">Acá vas a ver cuánto cortó cada barbero y qué comisión le corresponde.</div>';
+}
+
+// Init
+renderRegServicios();
+renderRegBarberos();
+renderPaneles();
+</script>
+</body>
+</html>
