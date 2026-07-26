@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Navaja — Barbería</title>
+<title>Barbería — Turnos online</title>
 <style>
   :root {
     --negro: #0e0d0b;
@@ -35,7 +35,6 @@
     border-bottom: 1px solid rgba(201,162,39,.25);
   }
   .logo { font-size: 1.4rem; letter-spacing: .15em; color: var(--dorado); text-transform: uppercase; }
-  .logo span { color: var(--crema); }
   nav ul { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
   nav a { color: var(--gris-texto); text-decoration: none; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
   nav a:hover { color: var(--dorado-claro); }
@@ -43,7 +42,6 @@
     background: var(--dorado); color: var(--negro) !important;
     padding: .5rem 1.2rem; border-radius: 2px; font-weight: bold;
   }
-  .btn-nav:hover { background: var(--dorado-claro); }
 
   /* ============ HERO ============ */
   .hero {
@@ -112,7 +110,86 @@
   .horarios-tabla td { padding: .35rem 0; border-bottom: 1px solid var(--gris); }
   .horarios-tabla td:first-child { color: var(--gris-texto); }
   .horarios-tabla td:last-child { text-align: right; }
-  .link-mapa { color: var(--dorado-claro); text-decoration: none; border-bottom: 1px dotted var(--dorado); }
+
+  /* ============ TURNOS ============ */
+  .turnos-intro { text-align: center; max-width: 600px; margin: 0 auto 2rem; color: var(--gris-texto); }
+  .turnos-cta { text-align: center; }
+
+  /* ============ MODAL ============ */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,.85); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.activo { display: flex; }
+  .modal {
+    background: var(--carbon); border: 1px solid var(--gris);
+    border-radius: 8px; padding: 2rem; max-width: 500px; width: 100%;
+    max-height: 90vh; overflow-y: auto; position: relative;
+  }
+  .modal-cerrar {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--gris-texto);
+    font-size: 1.5rem; cursor: pointer;
+  }
+  .modal-cerrar:hover { color: var(--dorado); }
+  .progreso { display: flex; gap: .5rem; margin-bottom: 2rem; }
+  .progreso-paso {
+    flex: 1; height: 4px; background: var(--gris); border-radius: 2px;
+  }
+  .progreso-paso.activo { background: var(--dorado); }
+  .paso { display: none; }
+  .paso.activo { display: block; }
+  .paso h3 { color: var(--dorado); text-transform: uppercase; letter-spacing: .15em; font-size: .9rem; margin-bottom: 1.5rem; text-align: center; }
+  .opciones { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .opcion {
+    background: var(--gris); border: 1px solid transparent; border-radius: 4px;
+    padding: 1rem; cursor: pointer; text-align: center; transition: all .2s;
+  }
+  .opcion:hover { border-color: rgba(201,162,39,.5); }
+  .opcion.seleccionada { border-color: var(--dorado); background: rgba(201,162,39,.12); }
+  .opcion .icono { font-size: 1.8rem; margin-bottom: .5rem; }
+  .opcion .nombre { font-weight: bold; color: var(--crema); font-size: .95rem; }
+  .opcion .detalle { color: var(--gris-texto); font-size: .8rem; margin-top: .3rem; }
+  .horarios-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+  .horario-btn {
+    background: var(--gris); border: 1px solid transparent; border-radius: 4px;
+    padding: .7rem; cursor: pointer; text-align: center; color: var(--crema);
+    font-family: inherit; font-size: .9rem; transition: all .2s;
+  }
+  .horario-btn:hover:not(:disabled) { border-color: rgba(201,162,39,.5); }
+  .horario-btn.seleccionado { border-color: var(--dorado); background: rgba(201,162,39,.12); color: var(--dorado-claro); }
+  .horario-btn:disabled { opacity: .3; cursor: not-allowed; text-decoration: line-through; }
+  .fecha-input {
+    width: 100%; padding: .8rem; background: var(--gris); border: 1px solid var(--gris);
+    border-radius: 4px; color: var(--crema); font-family: inherit; font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-input {
+    width: 100%; padding: .8rem; background: var(--gris); border: 1px solid var(--gris);
+    border-radius: 4px; color: var(--crema); font-family: inherit; font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-input:focus { outline: none; border-color: var(--dorado); }
+  .btn-continuar {
+    width: 100%; padding: 1rem; background: var(--dorado); color: var(--negro);
+    border: none; border-radius: 4px; font-family: inherit; font-size: 1rem;
+    font-weight: bold; letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; margin-top: 1rem;
+  }
+  .btn-continuar:disabled { opacity: .4; cursor: not-allowed; }
+  .resumen { background: var(--gris); border-radius: 4px; padding: 1.2rem; margin-bottom: 1rem; }
+  .resumen-linea { display: flex; justify-content: space-between; padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .resumen-linea:last-child { border-bottom: none; }
+  .resumen-linea .label { color: var(--gris-texto); }
+  .resumen-linea .valor { color: var(--crema); font-weight: bold; }
+  .confirmacion { text-align: center; padding: 2rem 0; }
+  .confirmacion .check { font-size: 4rem; margin-bottom: 1rem; }
+  .btn-whatsapp {
+    display: inline-block; padding: 1rem 2rem; background: var(--verde); color: var(--crema);
+    text-decoration: none; font-weight: bold; letter-spacing: .1em; text-transform: uppercase;
+    border-radius: 4px; margin-top: 1rem;
+  }
 
   /* ============ REGISTRADORA (DUEÑO) ============ */
   .caja-wrap { max-width: 760px; margin: 0 auto; }
@@ -179,18 +256,21 @@
     .btn.secundario { margin-left: 0; margin-top: .8rem; }
     .paneles { grid-template-columns: 1fr; }
     .registradora { padding: 1.3rem; }
+    .opciones { grid-template-columns: 1fr; }
+    .horarios-grid { grid-template-columns: repeat(3, 1fr); }
+    .modal { padding: 1.5rem; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">La <span>Navaja</span></div>
+  <div class="logo">Barbería</div>
   <ul>
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#turnos">Turnos</a></li>
     <li><a href="#visitanos">Visitanos</a></li>
     <li><a href="#caja">Caja</a></li>
-    <li><a href="https://wa.me/5491100000000" target="_blank" class="btn-nav">WhatsApp</a></li>
   </ul>
 </nav>
 
@@ -199,12 +279,12 @@
     <path d="M60 15 C50 5, 35 2, 22 8 C10 13, 5 22, 12 25 C18 27, 24 20, 30 16 C40 10, 52 12, 60 15 Z"/>
     <path d="M60 15 C70 5, 85 2, 98 8 C110 13, 115 22, 108 25 C102 27, 96 20, 90 16 C80 10, 68 12, 60 15 Z"/>
   </svg>
-  <p class="subtitulo">Est. 2026 — Barbería Clásica</p>
-  <h1>Estilo que se<br><em>hereda</em></h1>
-  <p>Cortes de precisión, afeitado con toalla caliente y la mejor charla del barrio. Sin turnos: venís, esperás lo tuyo y salís hecho un señor.</p>
+  <p class="subtitulo">Reservá tu turno online</p>
+  <h1>Tu estilo,<br><em>tu horario</em></h1>
+  <p>Reservá tu turno en segundos. Sin llamadas, sin esperas. Elegís el servicio, el barbero y la hora que más te conviene.</p>
   <div>
-    <a href="#servicios" class="btn">Ver servicios</a>
-    <a href="#visitanos" class="btn secundario">Cómo llegar</a>
+    <button class="btn" onclick="abrirModal()">Reservar turno</button>
+    <a href="#servicios" class="btn secundario">Ver servicios</a>
   </div>
 </header>
 
@@ -217,17 +297,29 @@
   <div class="servicios-grid" id="servicios-grid"></div>
 </section>
 
+<section id="turnos">
+  <div class="seccion-titulo">
+    <p class="etiqueta">Reservas online</p>
+    <h2>Tu turno en 30 segundos</h2>
+    <div class="linea"></div>
+  </div>
+  <p class="turnos-intro">Elegí el servicio, el barbero y la hora. Te confirmamos por WhatsApp al instante.</p>
+  <div class="turnos-cta">
+    <button class="btn" onclick="abrirModal()">Reservar ahora</button>
+  </div>
+</section>
+
 <section id="visitanos">
   <div class="seccion-titulo">
-    <p class="etiqueta">Por orden de llegada</p>
+    <p class="etiqueta">Te esperamos</p>
     <h2>Visitanos</h2>
     <div class="linea"></div>
   </div>
   <div class="info-grid">
     <div class="info-card">
       <h3>Dirección</h3>
-      <p>Av. Corrientes 1234</p>
-      <small>Buenos Aires — <a class="link-mapa" href="https://maps.google.com/?q=Av.+Corrientes+1234" target="_blank">ver en el mapa</a></small>
+      <p>Concepción del Uruguay</p>
+      <small>Entre Ríos</small>
     </div>
     <div class="info-card">
       <h3>Horarios</h3>
@@ -239,11 +331,67 @@
     </div>
     <div class="info-card">
       <h3>Contacto</h3>
-      <p><a class="link-mapa" href="https://wa.me/5491100000000" target="_blank">11 5555 5555</a></p>
-      <small>@lanavaja.barberia en Instagram</small>
+      <p>Consultas por WhatsApp</p>
+      <small>Respondemos al instante</small>
     </div>
   </div>
 </section>
+
+<!-- MODAL DE TURNOS -->
+<div class="modal-overlay" id="modal-turnos">
+  <div class="modal">
+    <button class="modal-cerrar" onclick="cerrarModal()">×</button>
+    
+    <div class="progreso">
+      <div class="progreso-paso activo" data-paso="1"></div>
+      <div class="progreso-paso" data-paso="2"></div>
+      <div class="progreso-paso" data-paso="3"></div>
+      <div class="progreso-paso" data-paso="4"></div>
+    </div>
+
+    <!-- Paso 1: Servicio -->
+    <div class="paso activo" data-paso="1">
+      <h3>Elegí el servicio</h3>
+      <div class="opciones" id="opciones-servicio"></div>
+      <button class="btn-continuar" id="btn-paso-1" disabled onclick="siguientePaso(2)">Continuar</button>
+    </div>
+
+    <!-- Paso 2: Barbero -->
+    <div class="paso" data-paso="2">
+      <h3>Elegí el barbero</h3>
+      <div class="opciones" id="opciones-barbero"></div>
+      <button class="btn-continuar" id="btn-paso-2" disabled onclick="siguientePaso(3)">Continuar</button>
+    </div>
+
+    <!-- Paso 3: Fecha y hora -->
+    <div class="paso" data-paso="3">
+      <h3>Elegí fecha y hora</h3>
+      <input type="date" class="fecha-input" id="fecha-turno" onchange="renderHorarios()">
+      <div class="horarios-grid" id="horarios-grid"></div>
+      <button class="btn-continuar" id="btn-paso-3" disabled onclick="siguientePaso(4)">Continuar</button>
+    </div>
+
+    <!-- Paso 4: Datos -->
+    <div class="paso" data-paso="4">
+      <h3>Tus datos</h3>
+      <input type="text" class="form-input" id="nombre-cliente" placeholder="Nombre completo" oninput="validarDatos()">
+      <input type="tel" class="form-input" id="telefono-cliente" placeholder="Teléfono (ej: 3442123456)" oninput="validarDatos()">
+      <div class="resumen" id="resumen-turno"></div>
+      <button class="btn-continuar" id="btn-paso-4" disabled onclick="confirmarTurno()">Confirmar turno</button>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="paso" data-paso="5">
+      <div class="confirmacion">
+        <div class="check">✓</div>
+        <h3 style="color: var(--dorado); margin-bottom: 1rem;">¡Turno confirmado!</h3>
+        <p style="color: var(--gris-texto); margin-bottom: 1.5rem;">Te enviamos la confirmación por WhatsApp</p>
+        <a href="#" class="btn-whatsapp" id="link-whatsapp" target="_blank">Abrir WhatsApp</a>
+        <button class="btn-continuar" onclick="cerrarModal()" style="margin-top: 1.5rem;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section id="caja">
   <div class="seccion-titulo">
@@ -283,33 +431,190 @@
 </section>
 
 <footer>
-  <div class="logo">La <span>Navaja</span></div>
-  <p>Av. Corrientes 1234 — Lun a Sáb, 9 a 20 hs</p>
-  <p style="margin-top:.8rem; opacity:.6">Demo hecha con cariño para un amigo ✂</p>
+  <div class="logo">Barbería</div>
+  <p>Concepción del Uruguay, Entre Ríos</p>
+  <p>Lun a Sáb, 9 a 20 hs</p>
 </footer>
 
 <script>
 // ==================== DATOS ====================
 const SERVICIOS = [
-  { id: 'corte',   nombre: 'Corte clásico',    desc: 'Tijera y máquina, terminación con navaja', precio: 8000,  duracion: 40, icono: '✂️' },
-  { id: 'barba',   nombre: 'Arreglo de barba', desc: 'Perfilado con navaja y toalla caliente',   precio: 6000,  duracion: 30, icono: '🪒' },
-  { id: 'combo',   nombre: 'Corte + Barba',    desc: 'El combo completo del caballero',          precio: 12000, duracion: 60, icono: '💈' },
-  { id: 'premium', nombre: 'Ritual Premium',   desc: 'Corte, barba, masaje y lavado',            precio: 18000, duracion: 90, icono: '👑' },
+  { id: 'corte',   nombre: 'Corte clásico',    desc: 'Tijera y máquina',             precio: 10000, duracion: 40, icono: '✂️' },
+  { id: 'barba',   nombre: 'Arreglo de barba', desc: 'Perfilado con navaja',           precio: 8000,  duracion: 30, icono: '🪒' },
+  { id: 'combo',   nombre: 'Corte + Barba',    desc: 'El combo completo',              precio: 15000, duracion: 60, icono: '💈' },
+  { id: 'premium', nombre: 'Ritual Premium',   desc: 'Corte, barba y masaje',          precio: 20000, duracion: 90, icono: '👑' },
 ];
 const BARBEROS = [
   { id: 'marcos', nombre: 'Marcos' },
   { id: 'dani',   nombre: 'Dani' },
 ];
-const COMISION = 0.5; // 50% para el barbero (ejemplo para la demo)
+const COMISION = 0.5;
+const HORARIOS = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00','18:00','19:00'];
 
 // ==================== ESTADO ====================
-const state = { servicio: null, barbero: null };
-const LS_KEY = 'lanavaja_cortes';
-const getCortes = () => JSON.parse(localStorage.getItem(LS_KEY) || '[]');
-const saveCortes = (c) => localStorage.setItem(LS_KEY, JSON.stringify(c));
+const state = { servicio: null, barbero: null, fecha: null, hora: null };
+const LS_CORTE = 'barberia_cortes';
+const LS_TURNO = 'barberia_turnos';
+const getCortes = () => JSON.parse(localStorage.getItem(LS_CORTE) || '[]');
+const saveCortes = (c) => localStorage.setItem(LS_CORTE, JSON.stringify(c));
+const getTurnos = () => JSON.parse(localStorage.getItem(LS_TURNO) || '[]');
+const saveTurnos = (t) => localStorage.setItem(LS_TURNO, JSON.stringify(t));
 const fmt$ = (n) => '$' + n.toLocaleString('es-AR');
 const hoyKey = () => new Date().toISOString().slice(0, 10);
 const mesKey = () => new Date().toISOString().slice(0, 7);
+
+// ==================== MODAL ====================
+function abrirModal() {
+  document.getElementById('modal-turnos').classList.add('activo');
+  resetModal();
+}
+function cerrarModal() {
+  document.getElementById('modal-turnos').classList.remove('activo');
+}
+function resetModal() {
+  state.servicio = null;
+  state.barbero = null;
+  state.fecha = null;
+  state.hora = null;
+  document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+  document.querySelector('.paso[data-paso="1"]').classList.add('activo');
+  document.querySelectorAll('.progreso-paso').forEach(p => p.classList.remove('activo'));
+  document.querySelector('.progreso-paso[data-paso="1"]').classList.add('activo');
+  renderOpcionesServicio();
+  renderOpcionesBarbero();
+  document.getElementById('fecha-turno').value = '';
+  document.getElementById('nombre-cliente').value = '';
+  document.getElementById('telefono-cliente').value = '';
+  document.getElementById('horarios-grid').innerHTML = '';
+  document.getElementById('resumen-turno').innerHTML = '';
+  document.querySelectorAll('.btn-continuar').forEach(b => b.disabled = true);
+}
+function siguientePaso(n) {
+  document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
+  document.querySelector(`.paso[data-paso="${n}"]`).classList.add('activo');
+  document.querySelectorAll('.progreso-paso').forEach(p => {
+    const paso = parseInt(p.dataset.paso);
+    if (paso < n) p.classList.add('activo');
+  });
+  if (n === 3) renderHorarios();
+  if (n === 4) renderResumen();
+}
+
+// ==================== TURNOS - PASO 1: SERVICIO ====================
+function renderOpcionesServicio() {
+  document.getElementById('opciones-servicio').innerHTML = SERVICIOS.map(s => `
+    <div class="opcion" data-id="${s.id}">
+      <div class="icono">${s.icono}</div>
+      <div class="nombre">${s.nombre}</div>
+      <div class="detalle">${fmt$(s.precio)} · ${s.duracion} min</div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#opciones-servicio .opcion').forEach(el =>
+    el.addEventListener('click', () => {
+      document.querySelectorAll('#opciones-servicio .opcion').forEach(o => o.classList.remove('seleccionada'));
+      el.classList.add('seleccionada');
+      state.servicio = SERVICIOS.find(s => s.id === el.dataset.id);
+      document.getElementById('btn-paso-1').disabled = false;
+    })
+  );
+}
+
+// ==================== TURNOS - PASO 2: BARBERO ====================
+function renderOpcionesBarbero() {
+  document.getElementById('opciones-barbero').innerHTML = BARBEROS.map(b => `
+    <div class="opcion" data-id="${b.id}">
+      <div class="nombre">${b.nombre}</div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#opciones-barbero .opcion').forEach(el =>
+    el.addEventListener('click', () => {
+      document.querySelectorAll('#opciones-barbero .opcion').forEach(o => o.classList.remove('seleccionada'));
+      el.classList.add('seleccionada');
+      state.barbero = BARBEROS.find(b => b.id === el.dataset.id);
+      document.getElementById('btn-paso-2').disabled = false;
+    })
+  );
+}
+
+// ==================== TURNOS - PASO 3: FECHA Y HORA ====================
+function renderHorarios() {
+  const fecha = document.getElementById('fecha-turno').value;
+  if (!fecha) return;
+  state.fecha = fecha;
+  
+  const turnos = getTurnos();
+  const ocupados = turnos
+    .filter(t => t.fecha === fecha && t.barberoId === state.barbero.id)
+    .map(t => t.hora);
+  
+  const hoy = hoyKey();
+  const esHoy = fecha === hoy;
+  const horaActual = new Date().getHours();
+  
+  document.getElementById('horarios-grid').innerHTML = HORARIOS.map(h => {
+    const horaNum = parseInt(h.split(':')[0]);
+    const ocupado = ocupados.includes(h);
+    const pasado = esHoy && horaNum <= horaActual;
+    const disabled = ocupado || pasado;
+    return `<button class="horario-btn ${disabled ? '' : ''}" data-hora="${h}" ${disabled ? 'disabled' : ''} onclick="seleccionarHora('${h}')">${h}</button>`;
+  }).join('');
+}
+function seleccionarHora(h) {
+  document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('seleccionado'));
+  document.querySelector(`.horario-btn[data-hora="${h}"]`).classList.add('seleccionado');
+  state.hora = h;
+  document.getElementById('btn-paso-3').disabled = false;
+}
+
+// ==================== TURNOS - PASO 4: DATOS Y RESUMEN ====================
+function renderResumen() {
+  document.getElementById('resumen-turno').innerHTML = `
+    <div class="resumen-linea"><span class="label">Servicio</span><span class="valor">${state.servicio.nombre}</span></div>
+    <div class="resumen-linea"><span class="label">Barbero</span><span class="valor">${state.barbero.nombre}</span></div>
+    <div class="resumen-linea"><span class="label">Fecha</span><span class="valor">${formatFecha(state.fecha)}</span></div>
+    <div class="resumen-linea"><span class="label">Hora</span><span class="valor">${state.hora} hs</span></div>
+    <div class="resumen-linea"><span class="label">Precio</span><span class="valor">${fmt$(state.servicio.precio)}</span></div>
+  `;
+}
+function validarDatos() {
+  const nombre = document.getElementById('nombre-cliente').value.trim();
+  const tel = document.getElementById('telefono-cliente').value.trim();
+  document.getElementById('btn-paso-4').disabled = !(nombre && tel);
+}
+function confirmarTurno() {
+  const nombre = document.getElementById('nombre-cliente').value.trim();
+  const tel = document.getElementById('telefono-cliente').value.trim();
+  
+  const turno = {
+    id: Date.now(),
+    servicioId: state.servicio.id,
+    servicioNombre: state.servicio.nombre,
+    barberoId: state.barbero.id,
+    barberoNombre: state.barbero.nombre,
+    fecha: state.fecha,
+    hora: state.hora,
+    nombre: nombre,
+    telefono: tel,
+    precio: state.servicio.precio,
+  };
+  
+  const turnos = getTurnos();
+  turnos.push(turno);
+  saveTurnos(turnos);
+  
+  // WhatsApp
+  const msg = `¡Hola ${nombre}! Te confirmo tu turno en Barbería:\n📅 ${formatFecha(state.fecha)} a las ${state.hora} hs\n💈 ${state.servicio.nombre} con ${state.barbero.nombre}\n💰 ${fmt$(state.servicio.precio)}\n¡Te esperamos!`;
+  const telLimpio = tel.replace(/\D/g, '');
+  const link = `https://wa.me/${telLimpio.startsWith('54') ? telLimpio : '54' + telLimpio}?text=${encodeURIComponent(msg)}`;
+  document.getElementById('link-whatsapp').href = link;
+  
+  siguientePaso(5);
+}
+
+function formatFecha(iso) {
+  const [y, m, d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
 
 // ==================== VIDRIERA ====================
 document.getElementById('servicios-grid').innerHTML = SERVICIOS.map(s => `
@@ -381,7 +686,6 @@ function renderPaneles() {
   const deHoy = cortes.filter(c => c.fecha === hoyKey());
   const delMes = cortes.filter(c => c.mes === mesKey());
 
-  // Caja de hoy
   document.getElementById('hoy-total').textContent = fmt$(deHoy.reduce((a, c) => a + c.precio, 0));
   document.getElementById('hoy-cant').textContent = `${deHoy.length} corte${deHoy.length === 1 ? '' : 's'}`;
   document.getElementById('hoy-lista').innerHTML = deHoy.length
@@ -390,10 +694,9 @@ function renderPaneles() {
         <div>${c.servicioNombre}<small>${c.barberoNombre} · ${c.hora} hs</small></div>
         <div class="monto">${fmt$(c.precio)}</div>
       </div>`).join('')
-    : '<div class="vacio">Todavía no hay cortes hoy. Registrá el primero arriba.</div>';
+    : '<div class="vacio">Todavía no hay cortes hoy.</div>';
   document.getElementById('btn-deshacer').style.display = deHoy.length ? 'inline-block' : 'none';
 
-  // El mes
   document.getElementById('mes-total').textContent = fmt$(delMes.reduce((a, c) => a + c.precio, 0));
   document.getElementById('mes-cant').textContent = `${delMes.length} cortes este mes`;
   document.getElementById('mes-barberos').innerHTML = delMes.length
@@ -406,7 +709,7 @@ function renderPaneles() {
           <div class="comision">${fmt$(Math.round(bruto * COMISION))}<small>su comisión (50%)</small></div>
         </div>`;
       }).join('')
-    : '<div class="vacio">Acá vas a ver cuánto cortó cada barbero y qué comisión le corresponde.</div>';
+    : '<div class="vacio">Acá vas a ver cuánto cortó cada barbero.</div>';
 }
 
 // Init
