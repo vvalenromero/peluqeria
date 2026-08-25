@@ -196,6 +196,71 @@
     font-size: 0.85rem;
     border-top: 1px solid var(--borde);
   }
+
+  /* ===== CATALOGO ===== */
+  .cats { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+  .chip {
+    background: white; border: 1px solid var(--borde); border-radius: 999px;
+    padding: 0.45rem 1rem; font-size: 0.88rem; font-weight: 600; color: var(--texto-claro);
+    cursor: pointer; transition: all 0.18s ease; font-family: inherit;
+  }
+  .chip:hover { border-color: var(--acento); color: var(--acento); }
+  .chip.activo { background: var(--acento); border-color: var(--acento); color: white; }
+  .productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.9rem; }
+  .producto {
+    background: white; border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.3rem;
+  }
+  .producto .emoji { font-size: 2.1rem; line-height: 1; }
+  .producto .nombre { font-size: 0.9rem; font-weight: 600; color: var(--texto); line-height: 1.3; }
+  .producto .precio { font-size: 0.95rem; font-weight: 800; color: var(--acento); }
+  .producto .pedir {
+    margin-top: 0.4rem; background: var(--acento); color: white; border: none; border-radius: 10px;
+    padding: 0.5rem 0; width: 100%; font-weight: 700; font-size: 0.85rem; cursor: pointer; font-family: inherit;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .producto .pedir:hover { background: var(--acento-oscuro); }
+  .producto .pedir:active { transform: scale(0.96); }
+
+  /* ===== CARRITO ===== */
+  .cart-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    background: var(--texto); color: white; padding: 0.8rem 1.2rem;
+    display: none; justify-content: space-between; align-items: center;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.15);
+  }
+  .cart-bar.visible { display: flex; }
+  .cart-bar .resumen-cart { font-weight: 700; font-size: 0.95rem; }
+  .cart-bar .btn-cart {
+    background: var(--acento); color: white; border: none; border-radius: 10px;
+    padding: 0.6rem 1.2rem; font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit;
+  }
+  .cart-panel {
+    position: fixed; inset: 0; z-index: 100; display: none;
+    background: rgba(0,0,0,0.5); align-items: flex-end; justify-content: center;
+  }
+  .cart-panel.visible { display: flex; }
+  .cart-body {
+    background: white; width: 100%; max-width: 500px; border-radius: 18px 18px 0 0;
+    padding: 1.5rem; max-height: 80vh; overflow-y: auto;
+  }
+  .cart-body h3 { font-size: 1.2rem; color: var(--texto); margin-bottom: 1rem; }
+  .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--borde); }
+  .cart-item .info { display: flex; align-items: center; gap: 0.6rem; }
+  .cart-item .qty { display: flex; align-items: center; gap: 0.5rem; }
+  .cart-item .qty button {
+    width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--borde);
+    background: white; cursor: pointer; font-size: 1rem; line-height: 1; color: var(--texto);
+  }
+  .cart-item .qty span { min-width: 1.2rem; text-align: center; font-weight: 700; }
+  .cart-item .subtotal { font-weight: 700; color: var(--acento); min-width: 4rem; text-align: right; }
+  .cart-total { display: flex; justify-content: space-between; padding: 1rem 0; font-weight: 800; font-size: 1.1rem; color: var(--texto); }
+  .btn-pedir-wa {
+    display: block; width: 100%; padding: 1rem; background: #25D366; color: white; border: none;
+    border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; text-align: center; text-decoration: none; font-family: inherit;
+  }
+  .cart-cerrar { display: block; width: 100%; margin-top: 0.6rem; padding: 0.5rem; background: none; border: none; color: var(--texto-claro); font-size: 0.9rem; cursor: pointer; font-family: inherit; }
+
   @media (max-width: 640px) {
     .hero { min-height: 60vh; padding: 5rem 1.25rem 2rem; }
     section { padding: 2.5rem 1.25rem; }
@@ -221,30 +286,10 @@
 <section>
   <div class="seccion-titulo">
     <h2>Nuestros productos</h2>
-    <p>Todo lo que tenemos para vos</p>
+    <p>Tocá una categoría, elegí y pedí por WhatsApp</p>
   </div>
-  <div class="servicios">
-    <div class="servicio">
-      <h3>Golosinas y snacks</h3>
-      <span class="precio">Desde $500</span>
-    </div>
-    <div class="servicio">
-      <h3>Bebidas y gaseosas</h3>
-      <span class="precio">Desde $800</span>
-    </div>
-    <div class="servicio">
-      <h3>Cigarrillos</h3>
-      <span class="precio">Desde $1.200</span>
-    </div>
-    <div class="servicio">
-      <h3>Artículos de librería</h3>
-      <span class="precio">Desde $300</span>
-    </div>
-    <div class="servicio">
-      <h3>Recargas y tarjetas</h3>
-      <span class="precio">Desde $1.000</span>
-    </div>
-  </div>
+  <div class="cats" id="cats"></div>
+  <div class="productos" id="productos"></div>
 </section>
 
 <section>
@@ -287,6 +332,133 @@
   <p>9 de Julio 1234 · Concepción del Uruguay, Entre Ríos</p>
   <p style="margin-top: 0.5rem; opacity: 0.7;">© 2026 El Centro</p>
 </footer>
+
+<div class="cart-bar" id="cartBar">
+  <span class="resumen-cart" id="cartResumen">0 productos</span>
+  <button class="btn-cart" onclick="toggleCart(true)">Pedir por WhatsApp</button>
+</div>
+
+<div class="cart-panel" id="cartPanel" onclick="if(event.target===this) toggleCart(false)">
+  <div class="cart-body">
+    <h3>Tu pedido</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <a class="btn-pedir-wa" id="btnPedirWa" href="#" target="_blank">Pedir por WhatsApp</a>
+    <button class="cart-cerrar" onclick="toggleCart(false)">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  const PRODUCTOS = [
+    { cat:'Golosinas', emoji:'🍫', nombre:'Alfajor Jorgito', precio:1500 },
+    { cat:'Golosinas', emoji:'🍪', nombre:'Galletitas Óreo', precio:1600 },
+    { cat:'Golosinas', emoji:'🍬', nombre:'Chupetín', precio:250 },
+    { cat:'Golosinas', emoji:'🍭', nombre:'Caramelos surtidos', precio:150 },
+    { cat:'Golosinas', emoji:'🍫', nombre:'Chocolate Cofler', precio:2200 },
+    { cat:'Golosinas', emoji:'🥨', nombre:'Papas fritas Lays', precio:1800 },
+    { cat:'Golosinas', emoji:'🍿', nombre:'Turrón de maní', precio:700 },
+    { cat:'Bebidas', emoji:'🥤', nombre:'Coca-Cola 500ml', precio:1800 },
+    { cat:'Bebidas', emoji:'💧', nombre:'Agua mineral 500ml', precio:900 },
+    { cat:'Bebidas', emoji:'🥤', nombre:'Sprite 500ml', precio:1800 },
+    { cat:'Bebidas', emoji:'🧃', nombre:'Gatorade', precio:1600 },
+    { cat:'Bebidas', emoji:'⚡', nombre:'Energizante Red Bull', precio:2200 },
+    { cat:'Bebidas', emoji:'🧃', nombre:'Jugo en polvo', precio:400 },
+    { cat:'Cigarrillos', emoji:'🚬', nombre:'Marlboro Box 20', precio:3500 },
+    { cat:'Cigarrillos', emoji:'🚬', nombre:'Philip Morris 20', precio:3200 },
+    { cat:'Cigarrillos', emoji:'🚬', nombre:'Lucky Strike 20', precio:3000 },
+    { cat:'Librería', emoji:'📓', nombre:'Cuaderno rayado', precio:1800 },
+    { cat:'Librería', emoji:'🖊️', nombre:'Lapicera Bic', precio:300 },
+    { cat:'Librería', emoji:'📄', nombre:'Cartulina', precio:200 },
+    { cat:'Librería', emoji:'🧴', nombre:'Pegamento', precio:800 },
+    { cat:'Recargas', emoji:'💳', nombre:'Recarga Sube', precio:1000 },
+    { cat:'Recargas', emoji:'📱', nombre:'Recarga de celular', precio:500 },
+  ];
+
+  const CATS = ['Todos', ...new Set(PRODUCTOS.map(p => p.cat))];
+  let catActiva = 'Todos';
+  const carrito = new Map(); // id -> cantidad
+
+  function renderCats() {
+    document.getElementById('cats').innerHTML = CATS.map(c =>
+      `<button class="chip ${c === catActiva ? 'activo' : ''}" onclick="filtrar('${c}')">${c}</button>`
+    ).join('');
+  }
+
+  function filtrar(cat) {
+    catActiva = cat;
+    renderCats();
+    renderProductos();
+  }
+
+  function renderProductos() {
+    const list = catActiva === 'Todos' ? PRODUCTOS : PRODUCTOS.filter(p => p.cat === catActiva);
+    document.getElementById('productos').innerHTML = list.map((p, i) => {
+      const id = PRODUCTOS.indexOf(p);
+      return `<div class="producto">
+        <div class="emoji">${p.emoji}</div>
+        <div class="nombre">${p.nombre}</div>
+        <div class="precio">$${p.precio.toLocaleString('es-AR')}</div>
+        <button class="pedir" onclick="addToCart(${id})">Pedir</button>
+      </div>`;
+    }).join('');
+  }
+
+  function addToCart(id) {
+    carrito.set(id, (carrito.get(id) || 0) + 1);
+    renderCarrito();
+  }
+
+  function changeQty(id, delta) {
+    const n = (carrito.get(id) || 0) + delta;
+    if (n <= 0) carrito.delete(id); else carrito.set(id, n);
+    renderCarrito();
+  }
+
+  function total() {
+    let t = 0;
+    carrito.forEach((q, id) => t += PRODUCTOS[id].precio * q);
+    return t;
+  }
+
+  function renderCarrito() {
+    const bar = document.getElementById('cartBar');
+    const cant = [...carrito.values()].reduce((a, b) => a + b, 0);
+    bar.classList.toggle('visible', cant > 0);
+    document.getElementById('cartResumen').textContent = `${cant} producto${cant !== 1 ? 's' : ''} · $${total().toLocaleString('es-AR')}`;
+
+    const items = document.getElementById('cartItems');
+    items.innerHTML = [...carrito.entries()].map(([id, q]) => {
+      const p = PRODUCTOS[id];
+      return `<div class="cart-item">
+        <div class="info"><span>${p.emoji}</span><span>${p.nombre}</span></div>
+        <div class="qty">
+          <button onclick="changeQty(${id}, -1)">−</button>
+          <span>${q}</span>
+          <button onclick="changeQty(${id}, 1)">+</button>
+        </div>
+        <span class="subtotal">$${(p.precio * q).toLocaleString('es-AR')}</span>
+      </div>`;
+    }).join('');
+
+    document.getElementById('cartTotal').textContent = '$' + total().toLocaleString('es-AR');
+
+    let msg = 'Hola, quiero pedir:\n';
+    carrito.forEach((q, id) => {
+      const p = PRODUCTOS[id];
+      msg += `- ${q}× ${p.nombre} ($${(p.precio * q).toLocaleString('es-AR')})\n`;
+    });
+    msg += `\nTotal: $${total().toLocaleString('es-AR')}`;
+    document.getElementById('btnPedirWa').href = 'https://wa.me/5493447123456?text=' + encodeURIComponent(msg);
+  }
+
+  function toggleCart(open) {
+    document.getElementById('cartPanel').classList.toggle('visible', open);
+  }
+
+  renderCats();
+  renderProductos();
+  renderCarrito();
+</script>
 
 </body>
 </html>
