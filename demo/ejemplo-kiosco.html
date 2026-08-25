@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiosco El Centro · Kiosco en Concepción del Uruguay</title>
+<meta name="description" content="Kiosco en el centro de Concepción del Uruguay. Golosinas, bebidas, cigarrillos y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --acento: oklch(0.55 0.15 30);
+    --acento-oscuro: oklch(0.4 0.12 30);
+    --fondo: oklch(0.97 0.01 80);
+    --tarjeta: white;
+    --texto: oklch(0.25 0.02 50);
+    --texto-claro: oklch(0.45 0.02 50);
+    --borde: oklch(0.9 0.01 80);
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background: var(--fondo);
+    color: var(--texto);
+  }
+  h1, h2, h3, .display {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -.02em;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--fondo);
+    border-bottom: 1px solid var(--borde);
+    padding: 1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--texto);
+  }
+  .logo span { color: var(--acento); }
+  nav .cta-nav {
+    background: var(--acento);
+    color: white;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .hero {
+    min-height: 70vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 6rem 1.5rem 3rem;
+    background: linear-gradient(135deg, var(--acento) 0%, var(--acento-oscuro) 100%);
+    color: white;
+  }
+  .hero-content { max-width: 600px; }
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  .hero .rubro {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+    max-width: 480px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.9rem 1.3rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: white;
+    color: var(--acento);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  section {
+    padding: 3.5rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .seccion-titulo {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .seccion-titulo h2 {
+    font-size: 1.8rem;
+    color: var(--texto);
+    margin-bottom: 0.5rem;
+  }
+  .seccion-titulo p {
+    color: var(--texto-claro);
+  }
+  .servicios {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .servicio {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .servicio h3 {
+    font-size: 1rem;
+    color: var(--texto);
+  }
+  .servicio .precio {
+    color: var(--acento);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .info-card {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .info-card .icono {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .info-card h3 {
+    font-size: 0.9rem;
+    color: var(--texto-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  .info-card p {
+    color: var(--texto);
+    font-weight: 600;
+  }
+  .info-card small {
+    color: var(--texto-claro);
+    font-size: 0.85rem;
+  }
+  .contacto {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+  }
+  .contacto h2 {
+    margin-bottom: 1rem;
+  }
+  .contacto .btn-primary {
+    background: var(--acento);
+    color: white;
+    margin-top: 1rem;
+  }
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: var(--texto-claro);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--borde);
+  }
+
+  /* ===== CATALOGO ===== */
+  .cats { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+  .chip {
+    background: white; border: 1px solid var(--borde); border-radius: 999px;
+    padding: 0.45rem 1rem; font-size: 0.88rem; font-weight: 600; color: var(--texto-claro);
+    cursor: pointer; transition: all 0.18s ease; font-family: inherit;
+  }
+  .chip:hover { border-color: var(--acento); color: var(--acento); }
+  .chip.activo { background: var(--acento); border-color: var(--acento); color: white; }
+  .productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.9rem; }
+  .producto {
+    background: white; border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.3rem;
+  }
+  .producto .emoji { font-size: 2.1rem; line-height: 1; }
+  .producto .nombre { font-size: 0.9rem; font-weight: 600; color: var(--texto); line-height: 1.3; }
+  .producto .precio { font-size: 0.95rem; font-weight: 800; color: var(--acento); }
+  .producto .pedir {
+    margin-top: 0.4rem; background: var(--acento); color: white; border: none; border-radius: 10px;
+    padding: 0.5rem 0; width: 100%; font-weight: 700; font-size: 0.85rem; cursor: pointer; font-family: inherit;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .producto .pedir:hover { background: var(--acento-oscuro); }
+  .producto .pedir:active { transform: scale(0.96); }
+
+  /* ===== CARRITO ===== */
+  .cart-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    background: var(--texto); color: white; padding: 0.8rem 1.2rem;
+    display: none; justify-content: space-between; align-items: center;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.15);
+  }
+  .cart-bar.visible { display: flex; }
+  .cart-bar .resumen-cart { font-weight: 700; font-size: 0.95rem; }
+  .cart-bar .btn-cart {
+    background: var(--acento); color: white; border: none; border-radius: 10px;
+    padding: 0.6rem 1.2rem; font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit;
+  }
+  .cart-panel {
+    position: fixed; inset: 0; z-index: 100; display: none;
+    background: rgba(0,0,0,0.5); align-items: flex-end; justify-content: center;
+  }
+  .cart-panel.visible { display: flex; }
+  .cart-body {
+    background: white; width: 100%; max-width: 500px; border-radius: 18px 18px 0 0;
+    padding: 1.5rem; max-height: 80vh; overflow-y: auto;
+  }
+  .cart-body h3 { font-size: 1.2rem; color: var(--texto); margin-bottom: 1rem; }
+  .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--borde); }
+  .cart-item .info { display: flex; align-items: center; gap: 0.6rem; }
+  .cart-item .qty { display: flex; align-items: center; gap: 0.5rem; }
+  .cart-item .qty button {
+    width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--borde);
+    background: white; cursor: pointer; font-size: 1rem; line-height: 1; color: var(--texto);
+  }
+  .cart-item .qty span { min-width: 1.2rem; text-align: center; font-weight: 700; }
+  .cart-item .subtotal { font-weight: 700; color: var(--acento); min-width: 4rem; text-align: right; }
+  .cart-total { display: flex; justify-content: space-between; padding: 1rem 0; font-weight: 800; font-size: 1.1rem; color: var(--texto); }
+  .btn-pedir-wa {
+    display: block; width: 100%; padding: 1rem; background: #25D366; color: white; border: none;
+    border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; text-align: center; text-decoration: none; font-family: inherit;
+  }
+  .cart-cerrar { display: block; width: 100%; margin-top: 0.6rem; padding: 0.5rem; background: none; border: none; color: var(--texto-claro); font-size: 0.9rem; cursor: pointer; font-family: inherit; }
+
+  @media (max-width: 640px) {
+    .hero { min-height: 60vh; padding: 5rem 1.25rem 2rem; }
+    section { padding: 2.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">El Centro<span>.</span></div>
+  <a href="#contacto" class="cta-nav">Contactar</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <span class="rubro">Kiosco</span>
+    <h1>Todo lo que necesitás, cerca de casa</h1>
+    <p>Estamos en el centro de Concepción del Uruguay con golosinas, bebidas, cigarrillos y todo lo que buscás.</p>
+    <a href="https://wa.me/5493447123456" class="btn btn-primary">Escribinos por WhatsApp</a>
+  </div>
+</header>
+
+<section>
+  <div class="seccion-titulo">
+    <h2>Nuestros productos</h2>
+    <p>Tocá una categoría, elegí y pedí por WhatsApp</p>
+  </div>
+  <div class="cats" id="cats"></div>
+  <div class="productos" id="productos"></div>
+</section>
+
+<section>
+  <div class="seccion-titulo">
+    <h2>Encontranos</h2>
+    <p>Estamos en el centro de Concepción del Uruguay</p>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icono">📍</div>
+      <h3>Dirección</h3>
+      <p>9 de Julio 1234</p>
+      <small>Concepción del Uruguay, Entre Ríos</small>
+    </div>
+    <div class="info-card">
+      <div class="icono">🕐</div>
+      <h3>Horarios</h3>
+      <p>Lun a Vie: 8 a 22</p>
+      <small>Sáb: 8 a 14</small>
+    </div>
+    <div class="info-card">
+      <div class="icono">📱</div>
+      <h3>WhatsApp</h3>
+      <p>3447 12-3456</p>
+      <small>Respondemos al toque</small>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="contacto">
+    <h2>¿Necesitás algo?</h2>
+    <p style="color: var(--texto-claro);">Escribinos por WhatsApp y te contestamos al instante.</p>
+    <a href="https://wa.me/5493447123456" class="btn btn-primary">Escribinos por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="margin-bottom: 0.5rem;">El Centro<span>.</span></div>
+  <p>9 de Julio 1234 · Concepción del Uruguay, Entre Ríos</p>
+  <p style="margin-top: 0.5rem; opacity: 0.7;">© 2026 El Centro</p>
+</footer>
+
+<div class="cart-bar" id="cartBar">
+  <span class="resumen-cart" id="cartResumen">0 productos</span>
+  <button class="btn-cart" onclick="toggleCart(true)">Pedir por WhatsApp</button>
+</div>
+
+<div class="cart-panel" id="cartPanel" onclick="if(event.target===this) toggleCart(false)">
+  <div class="cart-body">
+    <h3>Tu pedido</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <a class="btn-pedir-wa" id="btnPedirWa" href="#" target="_blank">Pedir por WhatsApp</a>
+    <button class="cart-cerrar" onclick="toggleCart(false)">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  const PRODUCTOS = [
+    { cat:'Golosinas', emoji:'🍫', nombre:'Alfajor Jorgito', precio:1500 },
+    { cat:'Golosinas', emoji:'🍪', nombre:'Galletitas Óreo', precio:1600 },
+    { cat:'Golosinas', emoji:'🍬', nombre:'Chupetín', precio:250 },
+    { cat:'Golosinas', emoji:'🍭', nombre:'Caramelos surtidos', precio:150 },
+    { cat:'Golosinas', emoji:'🍫', nombre:'Chocolate Cofler', precio:2200 },
+    { cat:'Golosinas', emoji:'🥨', nombre:'Papas fritas Lays', precio:1800 },
+    { cat:'Golosinas', emoji:'🍿', nombre:'Turrón de maní', precio:700 },
+    { cat:'Bebidas', emoji:'🥤', nombre:'Coca-Cola 500ml', precio:1800 },
+    { cat:'Bebidas', emoji:'💧', nombre:'Agua mineral 500ml', precio:900 },
+    { cat:'Bebidas', emoji:'🥤', nombre:'Sprite 500ml', precio:1800 },
+    { cat:'Bebidas', emoji:'🧃', nombre:'Gatorade', precio:1600 },
+    { cat:'Bebidas', emoji:'⚡', nombre:'Energizante Red Bull', precio:2200 },
+    { cat:'Bebidas', emoji:'🧃', nombre:'Jugo en polvo', precio:400 },
+    { cat:'Cigarrillos', emoji:'🚬', nombre:'Marlboro Box 20', precio:3500 },
+    { cat:'Cigarrillos', emoji:'🚬', nombre:'Philip Morris 20', precio:3200 },
+    { cat:'Cigarrillos', emoji:'🚬', nombre:'Lucky Strike 20', precio:3000 },
+    { cat:'Librería', emoji:'📓', nombre:'Cuaderno rayado', precio:1800 },
+    { cat:'Librería', emoji:'🖊️', nombre:'Lapicera Bic', precio:300 },
+    { cat:'Librería', emoji:'📄', nombre:'Cartulina', precio:200 },
+    { cat:'Librería', emoji:'🧴', nombre:'Pegamento', precio:800 },
+    { cat:'Recargas', emoji:'💳', nombre:'Recarga Sube', precio:1000 },
+    { cat:'Recargas', emoji:'📱', nombre:'Recarga de celular', precio:500 },
+  ];
+
+  const CATS = ['Todos', ...new Set(PRODUCTOS.map(p => p.cat))];
+  let catActiva = 'Todos';
+  const carrito = new Map(); // id -> cantidad
+
+  function renderCats() {
+    document.getElementById('cats').innerHTML = CATS.map(c =>
+      `<button class="chip ${c === catActiva ? 'activo' : ''}" onclick="filtrar('${c}')">${c}</button>`
+    ).join('');
+  }
+
+  function filtrar(cat) {
+    catActiva = cat;
+    renderCats();
+    renderProductos();
+  }
+
+  function renderProductos() {
+    const list = catActiva === 'Todos' ? PRODUCTOS : PRODUCTOS.filter(p => p.cat === catActiva);
+    document.getElementById('productos').innerHTML = list.map((p, i) => {
+      const id = PRODUCTOS.indexOf(p);
+      return `<div class="producto">
+        <div class="emoji">${p.emoji}</div>
+        <div class="nombre">${p.nombre}</div>
+        <div class="precio">$${p.precio.toLocaleString('es-AR')}</div>
+        <button class="pedir" onclick="addToCart(${id})">Pedir</button>
+      </div>`;
+    }).join('');
+  }
+
+  function addToCart(id) {
+    carrito.set(id, (carrito.get(id) || 0) + 1);
+    renderCarrito();
+  }
+
+  function changeQty(id, delta) {
+    const n = (carrito.get(id) || 0) + delta;
+    if (n <= 0) carrito.delete(id); else carrito.set(id, n);
+    renderCarrito();
+  }
+
+  function total() {
+    let t = 0;
+    carrito.forEach((q, id) => t += PRODUCTOS[id].precio * q);
+    return t;
+  }
+
+  function renderCarrito() {
+    const bar = document.getElementById('cartBar');
+    const cant = [...carrito.values()].reduce((a, b) => a + b, 0);
+    bar.classList.toggle('visible', cant > 0);
+    document.getElementById('cartResumen').textContent = `${cant} producto${cant !== 1 ? 's' : ''} · $${total().toLocaleString('es-AR')}`;
+
+    const items = document.getElementById('cartItems');
+    items.innerHTML = [...carrito.entries()].map(([id, q]) => {
+      const p = PRODUCTOS[id];
+      return `<div class="cart-item">
+        <div class="info"><span>${p.emoji}</span><span>${p.nombre}</span></div>
+        <div class="qty">
+          <button onclick="changeQty(${id}, -1)">−</button>
+          <span>${q}</span>
+          <button onclick="changeQty(${id}, 1)">+</button>
+        </div>
+        <span class="subtotal">$${(p.precio * q).toLocaleString('es-AR')}</span>
+      </div>`;
+    }).join('');
+
+    document.getElementById('cartTotal').textContent = '$' + total().toLocaleString('es-AR');
+
+    let msg = 'Hola, quiero pedir:\n';
+    carrito.forEach((q, id) => {
+      const p = PRODUCTOS[id];
+      msg += `- ${q}× ${p.nombre} ($${(p.precio * q).toLocaleString('es-AR')})\n`;
+    });
+    msg += `\nTotal: $${total().toLocaleString('es-AR')}`;
+    document.getElementById('btnPedirWa').href = 'https://wa.me/5493447123456?text=' + encodeURIComponent(msg);
+  }
+
+  function toggleCart(open) {
+    document.getElementById('cartPanel').classList.toggle('visible', open);
+  }
+
+  renderCats();
+  renderProductos();
+  renderCarrito();
+</script>
+
+</body>
+</html>
